@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Q3 - 知識問題</title>
+    <script>
+      function checkAnswer() {
+        const answer = document.querySelector('input[name="q3"]:checked');
+        if (!answer) {
+          alert("選択してください");
+          return;
+        }
+        let score = parseInt(localStorage.getItem("score")) || 0;
+        if (answer.value === "correct") {
+          score += 1;
+        }
+        localStorage.setItem("score", score);
+        window.location.href = "result.html";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Q3. CACとは何を表す指標か？</h1>
+    <form>
+      <input type="radio" name="q3" value="wrong1" /> Click and Convert<br />
+      <input type="radio" name="q3" value="correct" /> Customer Acquisition Cost<br />
+      <input type="radio" name="q3" value="wrong2" /> Consumer App Clicks<br />
+    </form>
+    <br />
+    <button onclick="checkAnswer()">結果を見る</button>
+  </body>
+</html>
