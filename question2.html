@@ -5,21 +5,26 @@
     <title>Q2 - LTVとは？</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // ✅ 再受験チェックは最初に書く
+      if (localStorage.getItem("disqualified") === "true") {
+        window.location.href = "disqualified.html";
+      }
+
+      // タブ離脱 → 失格
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden") {
-          alert("画面を離れたため、テストは終了します。");
-          document.body.innerHTML = `
-            <div class='flex items-center justify-center h-screen bg-gradient-to-br from-gray-800 to-black'>
-              <div class='text-center text-white text-3xl font-bold'>失格</div>
-            </div>`;
+          localStorage.setItem("disqualified", "true");
+          window.location.href = "disqualified.html";
         }
       });
 
+      // タイマー
       let time = 180;
       const countdown = setInterval(() => {
         if (time <= 0) {
           clearInterval(countdown);
-          document.getElementById("question").innerHTML = "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
+          document.getElementById("question").innerHTML =
+            "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
         } else {
           document.getElementById("timer").innerText = `${time} 秒`;
           time--;
@@ -41,6 +46,7 @@
       }
     </script>
   </head>
+
   <body class="bg-gradient-to-br from-slate-100 to-blue-200 min-h-screen flex items-center justify-center">
     <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10">
       <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6 tracking-tight">Q2. LTVとは何の略か？</h1>
