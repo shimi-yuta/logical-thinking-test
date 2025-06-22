@@ -1,0 +1,2 @@
+# logical-thinking-test
+ロジカルシンキングWebテスト
