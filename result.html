@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>結果</title>
+    <title>テスト結果</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       window.onload = function () {
         const score = localStorage.getItem("score") || 0;
         document.getElementById("result").innerText = `あなたのスコアは ${score} / 2 点です`;
+        // スコアを保存しておきたい場合はここで fetch なども可能
       };
     </script>
   </head>
-  <body>
-    <h1>ロジカルシンキング・テスト 結果</h1>
-    <p id="result"></p>
-    <br />
-    <button onclick="location.href='index.html'">もう一度やる</button>
+
+  <body class="bg-gradient-to-br from-slate-100 to-blue-200 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10 text-center text-gray-800">
+      <h1 class="text-3xl font-extrabold mb-4">ロジカルシンキング・テスト結果</h1>
+      <p id="result" class="text-2xl font-semibold text-blue-600 mb-8"></p>
+
+      <button
+        onclick="location.href='index.html'"
+        class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+      >
+        もう一度やる
+      </button>
+    </div>
   </body>
 </html>
+
