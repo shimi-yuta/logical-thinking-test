@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>結果</title>
+    <script>
+      window.onload = function () {
+        const score = localStorage.getItem("score") || 0;
+        document.getElementById("result").innerText = `あなたのスコアは ${score} / 2 点です`;
+      };
+    </script>
+  </head>
+  <body>
+    <h1>ロジカルシンキング・テスト 結果</h1>
+    <p id="result"></p>
+    <br />
+    <button onclick="location.href='index.html'">もう一度やる</button>
+  </body>
+</html>
