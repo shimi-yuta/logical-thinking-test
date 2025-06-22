@@ -1,9 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>Q3 - 知識問題</title>
+    <title>Q3 - CACとは？</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          alert("画面を離れたため、テストは終了します。");
+          document.body.innerHTML = `
+            <div class='flex items-center justify-center h-screen bg-gradient-to-br from-gray-800 to-black'>
+              <div class='text-center text-white text-3xl font-bold'>失格</div>
+            </div>`;
+        }
+      });
+
+      let time = 180;
+      const countdown = setInterval(() => {
+        if (time <= 0) {
+          clearInterval(countdown);
+          document.getElementById("question").innerHTML = "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
+        } else {
+          document.getElementById("timer").innerText = `${time} 秒`;
+          time--;
+        }
+      }, 1000);
+
       function checkAnswer() {
         const answer = document.querySelector('input[name="q3"]:checked');
         if (!answer) {
@@ -19,14 +41,27 @@
       }
     </script>
   </head>
-  <body>
-    <h1>Q3. CACとは何を表す指標か？</h1>
-    <form>
-      <input type="radio" name="q3" value="wrong1" /> Click and Convert<br />
-      <input type="radio" name="q3" value="correct" /> Customer Acquisition Cost<br />
-      <input type="radio" name="q3" value="wrong2" /> Consumer App Clicks<br />
-    </form>
-    <br />
-    <button onclick="checkAnswer()">結果を見る</button>
+  <body class="bg-gradient-to-br from-slate-100 to-blue-200 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10">
+      <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6 tracking-tight">Q3. CACとは何を表す指標か？</h1>
+      <div class="flex justify-center mb-6">
+        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full">
+          残り時間：<span id="timer" class="font-bold">180 秒</span>
+        </span>
+      </div>
+      <div id="question">
+        <form class="space-y-4 text-lg text-gray-700">
+          <label class="block"><input type="radio" name="q3" value="wrong1" class="mr-2" /> Click and Convert</label>
+          <label class="block"><input type="radio" name="q3" value="correct" class="mr-2" /> Customer Acquisition Cost</label>
+          <label class="block"><input type="radio" name="q3" value="wrong2" class="mr-2" /> Consumer App Clicks</label>
+        </form>
+        <div class="text-center mt-6">
+          <button onclick="checkAnswer()" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+            結果を見る
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
+
