@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Q2 - 知識問題</title>
+    <script>
+      function checkAnswer() {
+        const answer = document.querySelector('input[name="q2"]:checked');
+        if (!answer) {
+          alert("選択してください");
+          return;
+        }
+        if (answer.value === "correct") {
+          localStorage.setItem("score", 1);
+        } else {
+          localStorage.setItem("score", 0);
+        }
+        window.location.href = "question3.html";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Q2. LTVとは何の略か？</h1>
+    <form>
+      <input type="radio" name="q2" value="wrong1" /> Low Time Value<br />
+      <input type="radio" name="q2" value="correct" /> Life Time Value<br />
+      <input type="radio" name="q2" value="wrong2" /> Long Term Venture<br />
+    </form>
+    <br />
+    <button onclick="checkAnswer()">次へ</button>
+  </body>
+</html>
