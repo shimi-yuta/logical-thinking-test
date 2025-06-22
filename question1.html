@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <title>ロジカルシンキング・テスト</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // タブ移動検知（失格処理）
+      // タブ移動検知
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden") {
           alert("画面を離れたため、テストは終了します。");
-          document.body.innerHTML = "<h1>失格</h1>";
+          document.body.innerHTML = "<div class='text-center mt-40 text-3xl text-red-600 font-bold'>失格</div>";
         }
       });
 
@@ -18,29 +18,46 @@
       const countdown = setInterval(() => {
         if (time <= 0) {
           clearInterval(countdown);
-          document.getElementById("question").innerHTML = "<h2>時間切れ！</h2>";
+          document.getElementById("question").innerHTML = "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
         } else {
-          document.getElementById("timer").innerText = `${time}秒`;
+          document.getElementById("timer").innerText = `${time} 秒`;
           time--;
         }
       }, 1000);
 
-      // 提出処理：question2.htmlへ遷移
+      // ボタン押下で次の問題へ
       function submitAnswer() {
         const answer = document.getElementById("textarea").value;
-        // 必要に応じてlocalStorageなどで記録可能
+        // 保存も可能（後述）
         window.location.href = "question2.html";
       }
     </script>
   </head>
-  <body>
-    <h1>ロジカルシンキング・テスト</h1>
-    <p id="timer">180秒</p>
-    <div id="question">
-      <h2>Q. 日本全国にある美容室の数を推定してください。</h2>
-      <textarea id="textarea" rows="8" cols="60" placeholder="仮定・構造・答えを記述してください"></textarea>
-      <br /><br />
-      <button onclick="submitAnswer()">提出</button>
+
+  <body class="bg-gray-100 font-sans">
+    <div class="max-w-xl mx-auto mt-20 p-6 bg-white shadow-md rounded-md">
+      <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">ロジカルシンキング・テスト</h1>
+      <p class="text-center text-lg text-blue-600 mb-2">残り時間: <span id="timer" class="font-bold">180 秒</span></p>
+
+      <div id="question">
+        <h2 class="text-lg font-semibold mb-2">Q. 日本全国にある美容室の数を推定してください。</h2>
+        <textarea
+          id="textarea"
+          rows="6"
+          class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="仮定・構造・計算・答えを記入してください"
+        ></textarea>
+
+        <div class="text-center mt-6">
+          <button
+            onclick="submitAnswer()"
+            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+          >
+            提出する
+          </button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
+
