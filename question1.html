@@ -5,53 +5,66 @@
     <title>ロジカルシンキング・テスト</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // タブ移動検知
+      // タブ移動で失格
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "hidden") {
           alert("画面を離れたため、テストは終了します。");
-          document.body.innerHTML = "<div class='text-center mt-40 text-3xl text-red-600 font-bold'>失格</div>";
+          document.body.innerHTML = `
+            <div class='flex items-center justify-center h-screen bg-gradient-to-br from-gray-800 to-black'>
+              <div class='text-center text-white text-3xl font-bold'>失格</div>
+            </div>`;
         }
       });
 
-      // タイマー設定（180秒）
+      // タイマー処理
       let time = 180;
       const countdown = setInterval(() => {
         if (time <= 0) {
           clearInterval(countdown);
-          document.getElementById("question").innerHTML = "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
+          document.getElementById("question").innerHTML =
+            "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
         } else {
           document.getElementById("timer").innerText = `${time} 秒`;
           time--;
         }
       }, 1000);
 
-      // ボタン押下で次の問題へ
       function submitAnswer() {
         const answer = document.getElementById("textarea").value;
-        // 保存も可能（後述）
+        // 必要ならローカル保存：localStorage.setItem("answer1", answer);
         window.location.href = "question2.html";
       }
     </script>
   </head>
 
-  <body class="bg-gray-100 font-sans">
-    <div class="max-w-xl mx-auto mt-20 p-6 bg-white shadow-md rounded-md">
-      <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">ロジカルシンキング・テスト</h1>
-      <p class="text-center text-lg text-blue-600 mb-2">残り時間: <span id="timer" class="font-bold">180 秒</span></p>
+  <body class="bg-gradient-to-br from-slate-100 to-blue-200 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10">
+      <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6 tracking-tight">
+        ロジカルシンキング・テスト
+      </h1>
+
+      <div class="flex justify-center mb-6">
+        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full">
+          残り時間：<span id="timer" class="font-bold">180 秒</span>
+        </span>
+      </div>
 
       <div id="question">
-        <h2 class="text-lg font-semibold mb-2">Q. 日本全国にある美容室の数を推定してください。</h2>
+        <h2 class="text-xl font-semibold mb-3 text-gray-700">
+          Q. 日本全国にある美容室の数を推定してください。
+        </h2>
+
         <textarea
           id="textarea"
-          rows="6"
-          class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="仮定・構造・計算・答えを記入してください"
+          rows="8"
+          class="w-full border border-gray-300 rounded-lg p-4 text-gray-800 shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+          placeholder="仮定・構造・答えを自由に記述してください"
         ></textarea>
 
-        <div class="text-center mt-6">
+        <div class="mt-6 text-center">
           <button
             onclick="submitAnswer()"
-            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
           >
             提出する
           </button>
@@ -60,4 +73,3 @@
     </div>
   </body>
 </html>
-
