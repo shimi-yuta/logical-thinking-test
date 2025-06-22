@@ -1,20 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <title>ロジカルシンキング・テスト</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <h1>ロジカルシンキング・テストへようこそ</h1>
-    <h2>【注意事項】</h2>
-    <ul>
-      <li>このテストは <strong>時間制限（3分）</strong> があります</li>
-      <li><strong>タブの移動・最小化は禁止</strong>です（自動失格になります）</li>
-      <li>1問のみ・記述式・フェルミ推定です</li>
-    </ul>
-    <p>準備ができたら、以下のボタンを押してテストを開始してください。</p>
-    <br />
-    <button onclick="location.href='question1.html'">テストを開始する</button>
-  </body
+
+  <body class="bg-gradient-to-br from-slate-100 to-blue-200 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10 text-gray-800">
+      <h1 class="text-3xl font-extrabold text-center mb-6 tracking-tight">ロジカルシンキング・テストへようこそ</h1>
+
+      <h2 class="text-xl font-semibold mb-4">【注意事項】</h2>
+      <ul class="list-disc list-inside space-y-2 text-lg">
+        <li><strong>時間制限（各問180秒）</strong>があります</li>
+        <li><strong>タブの移動や画面最小化は禁止</strong>です（自動で失格になります）</li>
+        <li>テストは <strong>全3問</strong>：記述1問、選択2問</li>
+      </ul>
+
+      <div class="mt-8 text-center">
+        <button
+          onclick="location.href='question1.html'"
+          class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          テストを開始する
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
 
