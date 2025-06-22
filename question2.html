@@ -1,32 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>Q2 - 知識問題</title>
+    <title>Q2 - LTVとは？</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          alert("画面を離れたため、テストは終了します。");
+          document.body.innerHTML = `
+            <div class='flex items-center justify-center h-screen bg-gradient-to-br from-gray-800 to-black'>
+              <div class='text-center text-white text-3xl font-bold'>失格</div>
+            </div>`;
+        }
+      });
+
+      let time = 180;
+      const countdown = setInterval(() => {
+        if (time <= 0) {
+          clearInterval(countdown);
+          document.getElementById("question").innerHTML = "<div class='text-red-500 text-xl font-semibold mt-6'>時間切れです</div>";
+        } else {
+          document.getElementById("timer").innerText = `${time} 秒`;
+          time--;
+        }
+      }, 1000);
+
       function checkAnswer() {
         const answer = document.querySelector('input[name="q2"]:checked');
         if (!answer) {
           alert("選択してください");
           return;
         }
+        let score = parseInt(localStorage.getItem("score")) || 0;
         if (answer.value === "correct") {
-          localStorage.setItem("score", 1);
-        } else {
-          localStorage.setItem("score", 0);
+          score += 1;
         }
+        localStorage.setItem("score", score);
         window.location.href = "question3.html";
       }
     </script>
   </head>
-  <body>
-    <h1>Q2. LTVとは何の略か？</h1>
-    <form>
-      <input type="radio" name="q2" value="wrong1" /> Low Time Value<br />
-      <input type="radio" name="q2" value="correct" /> Life Time Value<br />
-      <input type="radio" name="q2" value="wrong2" /> Long Term Venture<br />
-    </form>
-    <br />
-    <button onclick="checkAnswer()">次へ</button>
+  <body class="bg-gradient-to-br from-slate-100 to-blue-200 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-10">
+      <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6 tracking-tight">Q2. LTVとは何の略か？</h1>
+      <div class="flex justify-center mb-6">
+        <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-2 rounded-full">
+          残り時間：<span id="timer" class="font-bold">180 秒</span>
+        </span>
+      </div>
+      <div id="question">
+        <form class="space-y-4 text-lg text-gray-700">
+          <label class="block"><input type="radio" name="q2" value="wrong1" class="mr-2" /> Low Time Value</label>
+          <label class="block"><input type="radio" name="q2" value="correct" class="mr-2" /> Life Time Value</label>
+          <label class="block"><input type="radio" name="q2" value="wrong2" class="mr-2" /> Long Term Venture</label>
+        </form>
+        <div class="text-center mt-6">
+          <button onclick="checkAnswer()" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+            次の問題へ
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
