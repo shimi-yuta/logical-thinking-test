@@ -22,7 +22,15 @@
       <br /><br />
       <button onclick="submitAnswer()">提出する</button>
       <br /><br />
-      <button onclick="alert('提出されました！')">提出</button>
+      <button onclick="submitAnswer()">提出</button>
+
+<script>
+  function submitAnswer() {
+    // 必要ならここで textarea の内容を取得して保存することも可能
+    window.location.href = "question2.html";
+  }
+</script>
+
     </div>
   </body>
 </html>
