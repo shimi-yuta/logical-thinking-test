@@ -2,35 +2,45 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>ロジカルテスト</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>ロジカルシンキング・テスト</title>
+    <link rel="stylesheet" href="style.css" />
     <script>
-  function submitAnswer() {
-    // ここでは記述回答は保存せず、次のページへ進みます
-    window.location.href = "question2.html";
-  }
-</script>
+      // タブ移動検知（失格処理）
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          alert("画面を離れたため、テストは終了します。");
+          document.body.innerHTML = "<h1>失格</h1>";
+        }
+      });
 
+      // タイマー設定（180秒）
+      let time = 180;
+      const countdown = setInterval(() => {
+        if (time <= 0) {
+          clearInterval(countdown);
+          document.getElementById("question").innerHTML = "<h2>時間切れ！</h2>";
+        } else {
+          document.getElementById("timer").innerText = `${time}秒`;
+          time--;
+        }
+      }, 1000);
+
+      // 提出処理：question2.htmlへ遷移
+      function submitAnswer() {
+        const answer = document.getElementById("textarea").value;
+        // 必要に応じてlocalStorageなどで記録可能
+        window.location.href = "question2.html";
+      }
+    </script>
   </head>
   <body>
     <h1>ロジカルシンキング・テスト</h1>
     <p id="timer">180秒</p>
     <div id="question">
       <h2>Q. 日本全国にある美容室の数を推定してください。</h2>
-      <textarea rows="8" cols="60" placeholder="仮定・構造・答えを記述してください"></textarea>
-      <br /><br />
-      <button onclick="submitAnswer()">提出する</button>
+      <textarea id="textarea" rows="8" cols="60" placeholder="仮定・構造・答えを記述してください"></textarea>
       <br /><br />
       <button onclick="submitAnswer()">提出</button>
-
-<script>
-  function submitAnswer() {
-    // 必要ならここで textarea の内容を取得して保存することも可能
-    window.location.href = "question2.html";
-  }
-</script>
-
     </div>
   </body>
 </html>
